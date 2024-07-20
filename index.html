@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Yu-Gi-Oh! Card Viewer</title>
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
@@ -11,7 +11,6 @@
         <input type="text" list="cards__search__list" id="card-search">
         <button class="card__search__button">Look Up</button>
         <datalist id="cards__search__list">
-            <option>A</option>
         </datalist>
     </header>
     
@@ -19,6 +18,33 @@
         <section class="card__container">
             <div class="card__container__image">
                 <img src="" alt="" class="image">
+            </div>
+        </section>
+
+        <section class="card__information">
+            <div class="card__information__name">
+                <div class="card__information__name__header">Name</div>
+                <div class="card__information__name__body"></div>
+            </div>
+            <div class="card__information__type">
+                <div class="card__information__type__header">Attribute</div>
+                <div class="card__information__type__body"></div>
+            </div>
+            <div class="card__information__level">
+                <div class="card__information__level__header">Level</div>
+                <div class="card__information__level__body"></div>
+            </div>
+            <div class="card__information__description">
+                <div class="card__information__description__header">Description</div>
+                <div class="card__information__description__body"></div>
+            </div>
+            <div class="card__information__atk">
+                <div class="card__information__atk__header">Atk</div>
+                <div class="card__information__atk__body"></div>
+            </div>
+            <div class="card__information__def">
+                <div class="card__information__def__header">Def</div>
+                <div class="card__information__def__body"></div>
             </div>
         </section>
     </main>
