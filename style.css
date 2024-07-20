@@ -21,8 +21,12 @@ header {
     justify-content: center;
     align-items: center;
     padding: 1rem;
-    background-color: #312e81;
     gap: 1rem;
+    background: rgb(2,6,23);
+    background: -moz-linear-gradient(21deg, rgba(2,6,23,1) 0%, rgba(17,24,39,1) 100%);
+    background: -webkit-linear-gradient(21deg, rgba(2,6,23,1) 0%, rgba(17,24,39,1) 100%);
+    background: linear-gradient(21deg, rgba(2,6,23,1) 0%, rgba(17,24,39,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020617",endColorstr="#111827",GradientType=1); 
 }
 #card-search {
     padding: 0.8rem;
@@ -53,6 +57,12 @@ header {
 main {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
+    min-height: 100vh;
+    background: rgb(15,23,42);
+    background: -moz-linear-gradient(0deg, rgba(15,23,42,1) 7%, rgba(23,37,84,1) 68%, rgba(30,27,75,1) 100%);
+    background: -webkit-linear-gradient(0deg, rgba(15,23,42,1) 7%, rgba(23,37,84,1) 68%, rgba(30,27,75,1) 100%);
+    background: linear-gradient(0deg, rgba(15,23,42,1) 7%, rgba(23,37,84,1) 68%, rgba(30,27,75,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#0f172a",endColorstr="#1e1b4b",GradientType=1); 
 }
 
 .card__container {
@@ -71,7 +81,7 @@ main {
     -webkit-user-select: none;
     -o-user-select: none;
     user-select: none;
-    width: 380px;
+    width: 450px;
     box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
     transition: all 0.2s ease-in-out;
 }
@@ -119,4 +129,65 @@ main {
 
 .hidden {
     display: none;
+}
+
+.card__information {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    grid-template-rows: repeat(4, 1fr);
+    padding: 1rem;
+    column-gap: 1rem;
+    align-items: center;
+}
+
+.card__information__name, .card__information__description {
+    grid-column-end: span 2;
+}
+
+.card__information__name__header,
+.card__information__type__header,
+.card__information__level__header,
+.card__information__description__header,
+.card__information__atk__header,
+.card__information__def__header {
+    background: rgb(2,6,23);
+    background: -moz-linear-gradient(106deg, rgba(2,6,23,1) 0%, rgba(12,10,9,1) 100%);
+    background: -webkit-linear-gradient(106deg, rgba(2,6,23,1) 0%, rgba(12,10,9,1) 100%);
+    background: linear-gradient(106deg, rgba(2,6,23,1) 0%, rgba(12,10,9,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#020617",endColorstr="#0c0a09",GradientType=1); 
+    color: #fff;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    font-weight: 800;
+    border-radius: 30px 0px 0px 0px;
+}
+
+.card__information__name__body,
+.card__information__type__body,
+.card__information__level__body,
+.card__information__description__body,
+.card__information__atk__body,
+.card__information__def__body {
+    background: rgb(248,250,252);
+    background: -moz-linear-gradient(216deg, rgba(248,250,252,1) 0%, rgba(209,213,219,1) 100%);
+    background: -webkit-linear-gradient(216deg, rgba(248,250,252,1) 0%, rgba(209,213,219,1) 100%);
+    background: linear-gradient(216deg, rgba(248,250,252,1) 0%, rgba(209,213,219,1) 100%);
+    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr="#f8fafc",endColorstr="#d1d5db",GradientType=1); 
+    color: #000;
+    padding: 1rem;
+    width: 100%;
+    text-align: center;
+    font-weight: 800;
+    border-radius: 0px 0px 3cqmax 0px;
+    line-height: 1.5rem;
+    font-weight: 600;
+    height: 56px;
+    box-shadow: rgba(6, 24, 44, 0.4) 0px 0px 0px 2px, rgba(6, 24, 44, 0.65) 0px 4px 6px -1px, rgba(255, 255, 255, 0.08) 0px 1px 0px inset;
+}
+
+.card__information__description__body {
+    font-size: 0.8rem;
+    text-align: justify;
+    height: max-content;
 }
