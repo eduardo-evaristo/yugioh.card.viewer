@@ -4,6 +4,22 @@ const cardSearchList = document.getElementById("cards__search__list");
 const cardSearchButton = document.querySelector(".card__search__button");
 const cardImage = document.querySelector(".image");
 const loader = document.querySelector(".loader");
+const cardName = document.querySelector(".card__information__name__body");
+const cardLevel = document.querySelector(".card__information__level__body");
+const cardType = document.querySelector(".card__information__type__body");
+const cardDescription = document.querySelector(
+  ".card__information__description__body"
+);
+const cardAtk = document.querySelector(".card__information__atk__body");
+const cardDef = document.querySelector(".card__information__def__body");
+const allTextFields = [
+  cardName,
+  cardType,
+  cardLevel,
+  cardDescription,
+  cardDef,
+  cardAtk,
+];
 
 // Initialization of variables
 let checkIfAlreadySearching = false;
@@ -27,7 +43,7 @@ cardSearch.addEventListener("input", function () {
       setTimeout(() => {
         // Show loader so that people know it's looking up the cards list
         toggleLoader();
-        getCardsInfo();
+        getCardsInfo(cardSearch.value);
       }, 1000);
 
       // Log the current value of the search field
@@ -44,6 +60,7 @@ cardSearch.addEventListener("input", function () {
 
 cardSearchButton.addEventListener("click", function () {
   toggleLoader();
+  cardSearchButton.toggleAttribute("disabled");
   const cardToBeSearched = cardSearch.value;
   getCardInfo(cardToBeSearched);
 });
@@ -88,8 +105,8 @@ function toggleLoader() {
 }
 
 // Function to get info about all cards
-function getCardsInfo() {
-  fetch("https://db.ygoprodeck.com/api/v7/cardinfo.php")
+function getCardsInfo(cardName) {
+  fetch(`https://db.ygoprodeck.com/api/v7/cardinfo.php?fname=${cardName}`)
     .then((response) => response.json())
     .then(({ data }) => {
       const cards = data;
@@ -109,7 +126,11 @@ function getCardsInfo() {
 function getCardInfo(cardName) {
   fetch(`https://db.ygoprodeck.com/api/v7/cardinfo.php?name=${cardName}`)
     .then((response) => response.json())
-    .then(({ data }) => renderCardImage(data[0].card_images[0].image_url))
+    .then(({ data }) => {
+      clearTextFields(allTextFields);
+      renderCardImage(data[0].card_images[0].image_url);
+      renderCardInfo(data);
+    })
     .finally(() => toggleLoader());
 }
 
@@ -119,13 +140,46 @@ function createListElement(data) {
   cardSearchList.insertAdjacentHTML("beforeend", html);
 }
 
+//Function to render card image
 function renderCardImage(image) {
   cardImage.src = "";
   cardImage.src = image;
   cardImage.style.width = "380px;";
 }
 
-function renderCardInfo(card) {}
+//Function to render card information
+function renderCardInfo(card) {
+  smoothWrite(cardName, card[0].name);
+  smoothWrite(cardType, card[0].attribute);
+  smoothWrite(cardLevel, card[0].level);
+  smoothWrite(cardDescription, card[0].desc, 0.1, true);
+  smoothWrite(cardAtk, card[0].atk);
+  smoothWrite(cardDef, card[0].def);
+}
+
+//Function to write information spacedly
+function smoothWrite(field, data, duration = 10, lock = false) {
+  let i = 0;
+  const toBeWrittenTextIntoArray = Array.from(String(data));
+  const interval = setInterval(() => {
+    field.textContent += toBeWrittenTextIntoArray[i];
+    i++;
+    if (i === toBeWrittenTextIntoArray.length) {
+      clearInterval(interval);
+      if (lock) {
+        cardSearchButton.toggleAttribute("disabled");
+      }
+    }
+  }, duration);
+}
+
+//Function to empty out all text fields before another search
+function clearTextFields(...fields) {
+  fields[0].forEach((field, i, a) => {
+    console.log(a);
+    field.textContent = "";
+  });
+}
 
 let arrayAF;
 let arrayGL;
